@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 3" # 03:00 on Wednesday, this is beacuse we want to update 1hr after the inputs update
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          logger: pretty
+
+      - name: Install whiskers
+        run: nix profile install nixpkgs#just nixpkgs#zip
+
+      - name: Build
+        run: just build
+
+      - name: Push changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'chore: update themes'
