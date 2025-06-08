@@ -20,7 +20,6 @@ build dir="textmate":
   mkdir -p themes
   mv "${dir}/"* themes/
   just build-compound
-  rm themes/*.tmTheme
 
 build-variant dir="textmate" variant="fall":
   #!/usr/bin/env sh
