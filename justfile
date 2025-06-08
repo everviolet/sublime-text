@@ -32,6 +32,5 @@ build-variant dir="textmate" variant="fall":
   mv "{{ variant }}.zip" "evergarden-{{ variant }}.sublime-package"
 
 build-compound:
-  cd themes/
-  zip evergarden *.tmTheme
-  mv evergarden.zip evergarden.sublime-package
+  zip evergarden themes/*.tmTheme
+  mv evergarden.zip themes/evergarden.sublime-package
