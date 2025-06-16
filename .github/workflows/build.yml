@@ -18,11 +18,16 @@ jobs:
         with:
           logger: pretty
 
-      - name: Install dependencies
-        run: nix profile install nixpkgs#just
+      - name: Setup cachix
+        uses: cachix/cachix-action@v13
+        with:
+          name: everviolet
+
+      - name: Install whiskers
+        run: nix profile install nixpkgs#just github:everviolet/whiskers
 
       - name: Build
-        run: just update
+        run: just build
 
       - name: Push changes
         uses: EndBug/add-and-commit@v9
